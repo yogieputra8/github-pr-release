@@ -7,7 +7,7 @@ var path = require('path')
 module.exports = function createReleasePR (config) {
   var client = new GithubClient(config)
 
-  return client.prepareReleasePR().then(function (releasePR) {
+  return client.prepareReleasePR(config).then(function (releasePR) {
     return client.collectReleasePRs(releasePR).then(function (prs) {
       var templatePath = config.template || path.join(__dirname, 'release.mustache')
       var template = fs.readFileSync(templatePath, 'utf8')
